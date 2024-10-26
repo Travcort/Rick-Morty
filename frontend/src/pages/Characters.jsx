@@ -1,10 +1,17 @@
-import { Text } from "@chakra-ui/react";
+import { useEffect } from "react";
+import DetailsCard from "../components/Card";
+import useData from "../data/Data";
 
 const CharactersPage = () => {
+
+    const { getCharacters, characters } = useData();
+
+    useEffect(() => {
+        getCharacters();
+    }, []);
+
     return(
-        <Text>
-            Characters Page
-        </Text>
+        <DetailsCard id={characters.id} status={characters.status} name={characters.name} species={characters.species} gender={characters.gender} image={characters.image}  />
     );
 }
 
