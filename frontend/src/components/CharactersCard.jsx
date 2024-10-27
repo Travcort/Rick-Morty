@@ -1,7 +1,7 @@
 import { Card, CardBody, Image, Stack, Heading, Text, Badge, useColorModeValue  } from '@chakra-ui/react';
 
 const DetailsCard = ({ id, status, name, species, gender, image, origin }) => {
-    const background = useColorModeValue("blackAlpha.900", "whiteAlpha.900");
+    const background = useColorModeValue("blue.900", "gray.300");
     const textColour = useColorModeValue("white", "black");
     return (
         <Card direction={'row'} maxW={'sm'} margin={'auto'} mt={5} borderRadius={10} bg={background}>
@@ -16,7 +16,7 @@ const DetailsCard = ({ id, status, name, species, gender, image, origin }) => {
                 <CardBody color={textColour}>
                     <Stack direction={'row'} alignItems={'center'}>
                         <Heading color={textColour}>{ name }</Heading>
-                        <Badge variant='subtle' colorScheme={status === "Alive" ? 'green' : 'red'}>
+                        <Badge variant='solid' color={textColour} colorScheme={status === "Alive" ? 'green' : 'red'}>
                             { status }
                         </Badge>
                     </Stack>

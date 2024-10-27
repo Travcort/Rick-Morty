@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-import DetailsCard from "../components/Card";
+import DetailsCard from "../components/CharactersCard";
 import useData from "../data/Data";
 
 const CharactersPage = () => {

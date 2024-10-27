@@ -1,10 +1,8 @@
-import { Text } from "@chakra-ui/react";
+import EpisodesCard from "../components/EpisodesCard";
 
 const EpisodesPage = () => {
     return(
-        <Text>
-            Episodes Page
-        </Text>
+        <EpisodesCard />
     );
 }
 

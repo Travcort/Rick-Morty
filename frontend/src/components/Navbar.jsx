@@ -5,10 +5,10 @@ import { Link, NavLink } from 'react-router-dom';
 const Navbar = () => {
     const { colorMode, toggleColorMode } = useColorMode();
     const { isOpen, onOpen, onClose } = useDisclosure();
-    const textColour = "blackAlpha.900" //useColorModeValue("blackAlpha.900", "whiteAlpha.900");
+    const textColour = useColorModeValue("whiteAlpha.900", "blackAlpha.900");
     const hoverColour = {
-        bg: "yellow.500",
-        color: "blackAlpha.900",
+        bg: "blue.800",
+        color: "white"
     };
 
     return(
@@ -25,7 +25,7 @@ const Navbar = () => {
                         {['characters', 'locations', 'episodes'].map((path) => (
                             <NavLink key={path} to={`/${path}`}>
                                 {({ isActive }) => (
-                                    <Button color={textColour} bg={isActive ? 'yellow.500' : 'transparent'} variant="ghost" _hover={hoverColour} onClick={onClose} >
+                                    <Button color={textColour} bg={isActive ? 'blue.900' : 'transparent'} variant="ghost" _hover={hoverColour} onClick={onClose} >
                                         {path.charAt(0).toUpperCase() + path.slice(1)}
                                     </Button>
                                 )}
@@ -58,7 +58,7 @@ const Navbar = () => {
                                     {['characters', 'locations', 'episodes'].map((path) => (
                                         <NavLink key={path} to={`/${path}`}>
                                             {({ isActive }) => (
-                                                <Button color={textColour} bg={isActive ? 'yellow.500' : 'transparent'} variant="ghost" _hover={hoverColour} onClick={onClose} >
+                                                <Button color={textColour} bg={isActive ? 'blue.900' : 'transparent'} variant="ghost" _hover={hoverColour} onClick={onClose} >
                                                     {path.charAt(0).toUpperCase() + path.slice(1)}
                                                 </Button>
                                             )}
