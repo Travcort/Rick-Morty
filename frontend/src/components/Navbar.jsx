@@ -7,7 +7,7 @@ const Navbar = () => {
     const { isOpen, onOpen, onClose } = useDisclosure();
     const textColour = useColorModeValue("whiteAlpha.900", "blackAlpha.900");
     const hoverColour = {
-        bg: "blue.800",
+        bg: "gray.700",
         color: "white"
     };
 
@@ -25,13 +25,13 @@ const Navbar = () => {
                         {['characters', 'locations', 'episodes'].map((path) => (
                             <NavLink key={path} to={`/${path}`}>
                                 {({ isActive }) => (
-                                    <Button color={textColour} bg={isActive ? 'blue.900' : 'transparent'} variant="ghost" _hover={hoverColour} onClick={onClose} >
+                                    <Button color={textColour} bg={isActive ? 'gray.700' : 'transparent'} variant="ghost" _hover={hoverColour} onClick={onClose} >
                                         {path.charAt(0).toUpperCase() + path.slice(1)}
                                     </Button>
                                 )}
                             </NavLink>
                         ))}
-                        <Button onClick={toggleColorMode} colorScheme={textColour} _hover={hoverColour} variant='ghost'>
+                        <Button onClick={toggleColorMode} color={textColour} _hover={hoverColour} variant='ghost'>
                             { colorMode === 'light' ? <IoMoon /> : <IoSunny /> }
                         </Button>
                     </Stack>
@@ -40,7 +40,7 @@ const Navbar = () => {
                     <Box display={{ base: "block", md: "none" }}>
                         <IconButton
                             icon={<IoMenu />}
-                            colorScheme={textColour}
+                            color={textColour}
                             onClick={onOpen}
                             variant="ghost"
                             _hover={hoverColour} 
@@ -51,14 +51,14 @@ const Navbar = () => {
                         {/* Drawer for mobile screens */}
                     <Drawer isOpen={isOpen} placement="left" onClose={onClose}>
                         <DrawerOverlay />
-                        <DrawerContent>
-                            <DrawerCloseButton />
+                        <DrawerContent bg={useColorModeValue("purple.600", "yellow")}>
+                            <DrawerCloseButton color={textColour} />
                             <DrawerBody>
                                 <Stack spacing={4} mt={6}>
                                     {['characters', 'locations', 'episodes'].map((path) => (
                                         <NavLink key={path} to={`/${path}`}>
                                             {({ isActive }) => (
-                                                <Button color={textColour} bg={isActive ? 'blue.900' : 'transparent'} variant="ghost" _hover={hoverColour} onClick={onClose} >
+                                                <Button color={textColour} bg={isActive ? 'gray.700' : 'transparent'} variant="ghost" _hover={hoverColour} onClick={onClose} >
                                                     {path.charAt(0).toUpperCase() + path.slice(1)}
                                                 </Button>
                                             )}
@@ -75,7 +75,7 @@ const Navbar = () => {
                                         {colorMode === 'light' ? <IoMoon /> : <IoSunny />}
                                     </Button>
 
-                                    <Text align={"center"}>
+                                    <Text align={"center"} color={textColour}>
                                         Made with ❤ by Tarv 
                                     </Text>
                                 </Stack>
