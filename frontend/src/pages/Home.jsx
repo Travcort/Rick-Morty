@@ -1,17 +1,13 @@
-import { Box, Text, useColorModeValue } from "@chakra-ui/react";
+import { Box } from "@chakra-ui/react";
+import TypeWriter from "../components/TypeWriter";
+import CarouselCard from "../components/CarouselCard";
 
 const HomePage = () => {
-    const gradient = useColorModeValue("blackAlpha.900", "gray.300")
 
-    return(
-        <Box minH={'100vh'}>
-            <Text 
-            color={gradient}
-            fontSize={{lg: '6xl', sm: '4xl'}}
-            fontWeight='extrabold'
-            >
-                The One Stop Shop for Rick and Morty Fans
-            </Text> 
+    return (
+        <Box maxH={'100vh'} alignContent={"center"}>
+            <CarouselCard />
+            <TypeWriter />
         </Box>
     );
 }

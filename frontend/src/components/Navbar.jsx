@@ -6,14 +6,21 @@ const Navbar = () => {
     const { colorMode, toggleColorMode } = useColorMode();
     const { isOpen, onOpen, onClose } = useDisclosure();
     const textColour = useColorModeValue("whiteAlpha.900", "blackAlpha.900");
-    const hoverColour = {
-        bg: "gray.700",
+    const background = useColorModeValue("#b7410e", "#daa520") // #daa520 - Golden Grass  #b7410e - Rust
+    const hoverColourLight = {
+        bg: "#FF8C00", // pizzaz
+        color: "white"
+    };
+    const hoverColourDark = {
+        bg: "#d2691e", // Hot cinnamon
         color: "white"
     };
 
+    const hoverColour = useColorModeValue(hoverColourLight, hoverColourDark);
+
     return(
         <div>
-            <Container borderRadius={10} bg={useColorModeValue("purple.600", "yellow")} maxW={{base:"100%", sm: "60%", md: "container.md", lg: "container.lg"}}>
+            <Container borderRadius={10} bg={background} maxW={{base:"100%", sm: "60%", md: "container.md", lg: "container.lg"}}>
                 <Flex alignItems={"center"} padding={2}>
                     <Text fontWeight={'bold'} color={textColour}>
                         <Link to={"/"}>Rick And Morty</Link>
@@ -51,8 +58,8 @@ const Navbar = () => {
                         {/* Drawer for mobile screens */}
                     <Drawer isOpen={isOpen} placement="left" onClose={onClose}>
                         <DrawerOverlay />
-                        <DrawerContent bg={useColorModeValue("purple.600", "yellow")}>
-                            <DrawerCloseButton color={textColour} />
+                        <DrawerContent bg={background}>
+                            <DrawerCloseButton color={hoverColour} />
                             <DrawerBody>
                                 <Stack spacing={4} mt={6}>
                                     {['characters', 'locations', 'episodes'].map((path) => (
