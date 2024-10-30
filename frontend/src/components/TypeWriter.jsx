@@ -69,7 +69,7 @@ const TypeWriter = () => {
     }, [charIndex, isTyping, headlineIndex]);
 
     return (
-        <Container bg={background} maxW={'sm'} mt={15} borderRadius={'lg'}>
+        <Container bg={background} maxW={'sm'} minH={'sm'} mt={15} borderRadius={'lg'}>
             <Text 
                 fontSize={'2xl'}
                 fontFamily={'monospace'}

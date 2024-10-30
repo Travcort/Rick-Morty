@@ -1,6 +1,7 @@
-import { useColorMode, useDisclosure, Button, Container, Flex,  Stack,  Spacer,  Text, useColorModeValue, Box, IconButton, Drawer, DrawerOverlay, DrawerContent, DrawerCloseButton, DrawerBody  } from '@chakra-ui/react'
+import { useColorMode, useDisclosure, Button, Container, Flex,  Stack,  Spacer,  Text, useColorModeValue, Box, IconButton, Drawer, DrawerOverlay, DrawerContent, DrawerCloseButton, DrawerBody, DrawerFooter, Badge  } from '@chakra-ui/react'
 import { IoSunny, IoMoon,IoMenu } from "react-icons/io5"; 
 import { Link, NavLink } from 'react-router-dom';
+import Footer from './Footer';
 
 const Navbar = () => {
     const { colorMode, toggleColorMode } = useColorMode();
@@ -20,10 +21,12 @@ const Navbar = () => {
 
     return(
         <div>
-            <Container borderRadius={10} bg={background} maxW={{base:"100%", sm: "60%", md: "container.md", lg: "container.lg"}}>
+            <Container borderRadius={10} bg={background} maxW={{base:"100%", sm: "100px", md: "container.md", lg: "container.lg"}}>
                 <Flex alignItems={"center"} padding={2}>
-                    <Text fontWeight={'bold'} color={textColour}>
-                        <Link to={"/"}>Rick And Morty</Link>
+                    <Text fontWeight={'extrabold'} fontSize={'xl'} color={textColour}>
+                        <Link to={"/"}>Rick And Morty
+                            <Badge ml={1} variant={'subtle'} textTransform={'smallcase'} size={'sm'} color={'green.900'}>v1.0</Badge>
+                        </Link>
                     </Text>
 
                     <Spacer />
@@ -59,7 +62,7 @@ const Navbar = () => {
                     <Drawer isOpen={isOpen} placement="left" onClose={onClose}>
                         <DrawerOverlay />
                         <DrawerContent bg={background}>
-                            <DrawerCloseButton color={hoverColour} />
+                            <DrawerCloseButton color={textColour} _hover={hoverColour} />
                             <DrawerBody>
                                 <Stack spacing={4} mt={6}>
                                     {['characters', 'locations', 'episodes'].map((path) => (
@@ -82,11 +85,14 @@ const Navbar = () => {
                                         {colorMode === 'light' ? <IoMoon /> : <IoSunny />}
                                     </Button>
 
-                                    <Text align={"center"} color={textColour}>
+                                    <Text align={"center"} color={textColour} fontWeight={'bold'}>
                                         Made with ❤ by Tarv 
                                     </Text>
                                 </Stack>
                             </DrawerBody>
+                            <DrawerFooter>
+                                <Footer />
+                            </DrawerFooter>
                         </DrawerContent>
                     </Drawer>
                 </Flex>
