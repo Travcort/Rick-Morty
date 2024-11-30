@@ -1,8 +1,5 @@
 {
     "version": 2,
-    "scripts": {
-      "build": "cd frontend && npm install && npm run build"
-    },
     "builds": [
       {
         "src": "backend/index.js", 
