@@ -1,9 +1,11 @@
 {
     "version": 2,
-    "routes": [
+    "buildCommand": "sh vercel.sh",
+    "outputDirectory": "frontend/dist",
+    "rewrites": [
         { 
           "src": "/(.*)", 
-          "dest": "backend/index.js" 
+          "dest": "/api/index.js" 
         }
       ]
 }

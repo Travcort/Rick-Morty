@@ -1,5 +1,5 @@
 import express from 'express';
-const app = express();
+export const app = express();
 import { PORT } from './utils/config.js';
 
 import path from 'path';
@@ -21,7 +21,10 @@ if (process.env.NODE_ENV === "production") {
         res.sendFile(path.resolve(__dirname, "frontend", "dist", "index.html"));
     })
 }
+else {
+    app.listen(PORT, () => {
+        info(`Server running on \x1b[34mhttp://localhost:${PORT}\x1b[0m`);
+    });
 
-app.listen(PORT, () => {
-    info(`Server running on \x1b[34mhttp://localhost:${PORT}\x1b[0m`);
-})
+    app.use(express.static(path.join(__dirname, 'frontend/dist')));
+}
