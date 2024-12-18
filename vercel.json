@@ -2,6 +2,11 @@
     "version": 2,
     "buildCommand": "sh vercel.sh",
     "outputDirectory": "frontend/dist",
+    "functions": {
+      "api/index.js": {
+        "maxDuration": 30
+      }
+    },
     "rewrites": [
         { 
           "source": "/(.*)", 
