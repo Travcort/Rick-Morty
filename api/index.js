@@ -7,7 +7,7 @@ import { info } from './utils/logging.js';
 // Routing
 import mortyRoutes from './routes/morty.routes.js';
 
-const App = () => {
+const main = () => {
     const app = express();
     const __dirname = path.resolve();
 
@@ -31,4 +31,4 @@ const App = () => {
     }
 }
 
-export default App;
+export default main;
