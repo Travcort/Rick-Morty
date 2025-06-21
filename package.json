@@ -1,23 +1,19 @@
 {
-  "name": "backend",
+  "name": "rick-morty",
+  "private": true,
   "version": "1.0.0",
-  "description": "The Rick and Morty",
-  "main": "index.js",
-  "type": "module",
+  "workspaces": [
+    "apps/*",
+    "packages/*"
+  ],
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "cross-env NODE_ENV=development nodemon ./api/index.js",
-    "build": "npm install && npm install --prefix frontend && npm run build --prefix frontend",
-    "start": "cross-env NODE_ENV=production node ./api/index.js"
+    "dev:web": "yarn workspace web dev",
+    "dev:mobile": "yarn workspace mobile android-dev"
   },
-  "author": "Tarv",
-  "license": "ISC",
-  "dependencies": {
-    "dotenv": "^16.4.5",
-    "express": "^4.21.1"
+  "resolutions": {
+    "react": "19.0.0",
+    "react-dom": "19.0.0"
   },
-  "devDependencies": {
-    "cross-env": "^7.0.3",
-    "nodemon": "^3.1.7"
-  }
+  "repository": "https://github.com/Travcort/Rick-Morty.git",
+  "license": "ISC"
 }
