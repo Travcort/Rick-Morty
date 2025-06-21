@@ -1,5 +1,6 @@
-import { Pressable, TextInput, View, useColorScheme } from 'react-native';
+import { Platform, Pressable, TextInput, View, useColorScheme } from 'react-native';
 import FontAwesome from '@expo/vector-icons/FontAwesome';
+import { FaSearch } from "react-icons/fa";
 import useStore from '../store/stateStore';
 import { Link } from 'expo-router';
 import { Theme } from '../store/colours';
@@ -30,7 +31,11 @@ const SearchInput = ({ endpoint, showSearch, screen }) => {
                     showSearch();
                     setQuery('');
                 }}>
-                    <FontAwesome name="search" size={24} color={query ? theme.inverseText : "gray"} />
+                    if (Platform.OS === 'web')
+                    {Platform.OS === 'web'
+                    ? (<FaSearch size={24} color={query ? theme.inverseText : "gray"} />)
+                    : (<FontAwesome name="search" size={24} color={query ? theme.inverseText : "gray"} />)
+                    }
                 </Pressable>
             </Link>
         </View>
