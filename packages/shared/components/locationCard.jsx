@@ -1,6 +1,7 @@
-import { View, Text, StyleSheet, Pressable, useColorScheme } from "react-native";
+import { View, Text, StyleSheet, Pressable, useColorScheme, Platform } from "react-native";
 import { Link } from "expo-router";
 import FontAwesome from '@expo/vector-icons/FontAwesome';
+import { FaAngleRight } from "react-icons/fa";
 import { Theme } from "../store/colours";
 
 export default function LocationCard({ name, type, dimension, getResidents, locationID }) {
@@ -27,12 +28,23 @@ export default function LocationCard({ name, type, dimension, getResidents, loca
                     <Text style={{color: theme.generalText}}>{locationID}</Text>
                 </View>
 
-                <Link href="/residents" style={styles.residentsButton} asChild>
-                    <Pressable onPress={getResidents}>
-                        <Text style={{ fontWeight: "bold", color: "#fff" }}>Residents</Text>
-                        <FontAwesome name="angle-right" size={24} color="white" />
-                    </Pressable>
-                </Link>
+                {Platform.OS === 'web'
+                ?(
+                    <a href="/residents" style={styles.residentsButton}>
+                        <Pressable onPress={getResidents}>
+                            <Text style={{ fontWeight: "bold", color: "#fff" }}>Residents</Text>
+                            <FaAngleRight size={24} color="white" />
+                        </Pressable>
+                    </a>
+                )
+                :(
+                    <Link href="/residents" style={styles.residentsButton} asChild>
+                        <Pressable onPress={getResidents}>
+                            <Text style={{ fontWeight: "bold", color: "#fff" }}>Residents</Text>
+                            <FontAwesome name="angle-right" size={24} color="white" />
+                        </Pressable>
+                    </Link>
+                )}
             </View>
         </View>
     );

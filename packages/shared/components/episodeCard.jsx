@@ -1,4 +1,4 @@
-import { View, Text, StyleSheet, Pressable, useColorScheme } from "react-native";
+import { View, Text, StyleSheet, Pressable, useColorScheme, Platform } from "react-native";
 import { Link } from "expo-router";
 import FontAwesome from '@expo/vector-icons/FontAwesome';
 import { FaAngleRight } from "react-icons/fa";
@@ -28,15 +28,22 @@ export default function EpisodeCard({ name, airDate, episode, getCharacters, epi
                     <Text style={{color: theme.generalText}}>{episodeID}</Text>
                 </View>
 
-                <Link href="/episodeCharacters" style={styles.charactersButton} asChild>
-                    <Pressable onPress={getCharacters}>
+                {Platform.OS === 'web'
+                ?(
+                    <a href="/episodeCharacters" onClick={getCharacters} style={styles.charactersButton}>
                         <Text style={{ fontWeight: "bold", color: "#fff" }}>Characters</Text>
-                        {Platform.OS === 'web'
-                            ? <FaAngleRight size={24} color="white" />
-                            : <FontAwesome name="angle-right" size={24} color="white" />
-                        }
-                    </Pressable>
-                </Link>
+                        <FaAngleRight size={24} color="white" />
+                    </a>
+                )
+                :(
+                    <Link href="/episodeCharacters" style={styles.charactersButton} asChild>
+                        <Pressable onPress={getCharacters}>
+                            <Text style={{ fontWeight: "bold", color: "#fff" }}>Characters</Text>
+                            <FontAwesome name="angle-right" size={24} color="white" />
+                        </Pressable>
+                    </Link>
+                )
+                }
             </View>
         </View>
     );

@@ -11,14 +11,12 @@ const SearchInput = ({ endpoint, showSearch, screen }) => {
     const setQuery = useStore((state) => state.setSearchQuery);
     const query = useStore((state) => state.searchQuery);
 
-    let Icon;
     const color = query ? theme.inverseText : 'gray';
-    if (Platform.OS === 'web') {
-        Icon = () => <FaSearch size={24} color={color} />;
-    } 
-    else {
-        const FontAwesome = require('@expo/vector-icons/FontAwesome').default;
-        Icon = () => <FontAwesome name="search" size={24} color={color} />;
+    const handleSearch = () => {
+        const url = `https://rickandmortyapi.com/api/${endpoint}/?${filter}=${query}`;
+        fetchFiltered(url); 
+        showSearch();
+        setQuery('');
     }
 
     return (
@@ -33,16 +31,22 @@ const SearchInput = ({ endpoint, showSearch, screen }) => {
              placeholderTextColor={theme.inverseText}
              selectionColor={theme.inverseText}
             />
-            <Link href={screen} asChild>
-                <Pressable onPress={() => {
-                    const url = `https://rickandmortyapi.com/api/${endpoint}/?${filter}=${query}`;
-                    fetchFiltered(url); 
-                    showSearch();
-                    setQuery('');
-                }}>
-                    <Icon />
-                </Pressable>
-            </Link>
+            {Platform.OS === 'web'
+            ?(
+                <a href={screen}>
+                    <Pressable onPress={handleSearch}>
+                        <FaSearch size={24} color={color} />
+                    </Pressable>
+                </a>
+            )
+            :(
+                <Link href={screen} asChild>
+                    <Pressable onPress={handleSearch}>
+                        <FontAwesome name="search" size={24} color={color} />;
+                    </Pressable>
+                </Link>
+            )
+            }
         </View>
     );
 }
