@@ -1,7 +1,7 @@
 import { Platform, Pressable, TextInput, View, useColorScheme } from 'react-native';
 import { FaSearch } from "react-icons/fa";
 import useStore from '../store/stateStore';
-import { Link } from 'expo-router';
+// import { Link } from 'expo-router';
 import { Theme } from '../store/colours';
 
 const SearchInput = ({ endpoint, showSearch, screen }) => {

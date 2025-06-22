@@ -1,6 +1,6 @@
 import { View, Text, StyleSheet, Pressable, useColorScheme, Platform } from "react-native";
-import { Link } from "expo-router";
-import FontAwesome from '@expo/vector-icons/FontAwesome';
+// import { Link } from "expo-router";
+// import FontAwesome from '@expo/vector-icons/FontAwesome';
 import { FaAngleRight } from "react-icons/fa";
 import { Theme } from "../store/colours";
 

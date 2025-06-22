@@ -1,6 +1,6 @@
 import { memo } from 'react';
 import { View, ScrollView, StyleSheet, Platform, Text, Image, Pressable, useColorScheme } from "react-native";
-import { Link } from 'expo-router';
+// import { Link } from 'expo-router';
 import Octicons from '@expo/vector-icons/Octicons';
 import { GoDotFill } from "react-icons/go";
 import FontAwesome from '@expo/vector-icons/FontAwesome';
