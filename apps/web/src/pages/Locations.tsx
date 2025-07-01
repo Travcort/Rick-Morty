@@ -2,8 +2,10 @@ import useStore, { type LocationTypes } from "shared/store/stateStore";
 import EndpointsLayout from "./EndpointsLayout";
 import { useEffect } from "react";
 import { LocationCard } from "@/components/shared/LocationCard";
+import { useParams } from "react-router";
 
 export default function LocationsPage() {
+    const { id } = useParams();
     const isLoading = useStore((state) => state.isLoading);
     const prevPage = useStore((state) => state.prevPage);
     const nextPage = useStore((state) => state.nextPage);
@@ -13,8 +15,10 @@ export default function LocationsPage() {
     const locationResidents = useStore((state) => state.locationResidents);
 
     useEffect(() => {
-        fetchLocations('https://rickandmortyapi.com/api/location')
-    }, []);
+        if(!id) {
+            fetchLocations('https://rickandmortyapi.com/api/location')
+        }
+    }, [id, fetchLocations]);
 
     return (
         <EndpointsLayout 

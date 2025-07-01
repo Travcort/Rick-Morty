@@ -2,18 +2,22 @@ import useStore, { type EpisodeTypes } from "shared/store/stateStore";
 import EndpointsLayout from "./EndpointsLayout";
 import { EpisodeCard } from "@/components/shared/EpisodeCard";
 import { useEffect } from "react";
+import { useParams } from "react-router";
 
 export default function EpisodesPage() {
+    const { id } = useParams();
     const isLoading = useStore((state) => state.isLoading);
     const prevPage = useStore((state) => state.prevPage);
     const nextPage = useStore((state) => state.nextPage);
-    const episodes = useStore((state) => state.episodes);
+    const episodes = useStore((state) => id ? state.characterEpisodes : state.episodes);
     const fetchEpisodes = useStore((state) => state.fetchEpisodes);
     const fetchCharacters = useStore((state) => state.storeCharacters);
 
     useEffect(() => {
-        fetchEpisodes('https://rickandmortyapi.com/api/episode')
-    }, []);
+        if (!id) {
+            fetchEpisodes('https://rickandmortyapi.com/api/episode');
+        }
+    }, [id, fetchEpisodes])
 
     return (
         <EndpointsLayout 
@@ -21,7 +25,7 @@ export default function EpisodesPage() {
             prevPage={prevPage}
             nextPage={nextPage}
             items={episodes}
-            fetchData={fetchEpisodes}
+            {...(!id && { fetchData: fetchEpisodes })}
             renderItem={(episode: EpisodeTypes) => (
                 <EpisodeCard 
                     key={episode.id}

@@ -7,7 +7,7 @@ type EndpointsLayoutProps<T> = {
   nextPage: string;
   items: T[];
   renderItem: (item: T) => React.ReactNode;
-  fetchData: (url: string) => Promise<void>;
+  fetchData?: (url: string) => Promise<void>;
 };
 
 const EndpointsLayout = <T,>({ isLoading, prevPage, nextPage, items, renderItem, fetchData }: EndpointsLayoutProps<T>) => {
@@ -15,13 +15,17 @@ const EndpointsLayout = <T,>({ isLoading, prevPage, nextPage, items, renderItem,
     return (
         <div className="flex flex-1 flex-col">
             {isLoading
-                ?(<Spinner size="large" className="text-[var(--cardBackground)]" />)
+                ?(
+                    <div className="flex items-center justify-center min-h-screen">
+                        <Spinner size="large" className="text-[var(--cardBackground)]" />
+                    </div>
+                )
                 :(
                     <>
                         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-6 p-4">
                             {items.map(renderItem)}
                         </div>
-                        <PaginationButtons getData={fetchData} prevPage={prevPage} nextPage={nextPage} />
+                        {fetchData && <PaginationButtons getData={fetchData} prevPage={prevPage} nextPage={nextPage} />}
                     </>
                 )
             }

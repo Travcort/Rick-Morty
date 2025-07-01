@@ -10,7 +10,7 @@ import Autoplay from "embla-carousel-autoplay"
 import { Button } from "@/components/ui/button"
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
 import { Badge } from "@/components/ui/badge"
-import { NavLink } from "react-router";
+import { Link, NavLink } from "react-router";
 import { Menu } from 'lucide-react';
 import rickyImage from "@/assets/rick-sanchez.png";
 import mortyImage from "@/assets/morty.png";
@@ -28,7 +28,7 @@ const Navbar = () => {
 
     return (
         <div className="flex bg-[var(--cardBackground)] justify-between sticky top-3 max-w-xl mx-auto rounded-lg px-4 py-2 shadow-sm">
-            <div className="flex items-center">
+            <Link to={'/'} className="flex items-center">
                 <Carousel
                     plugins={[
                         Autoplay({
@@ -49,7 +49,7 @@ const Navbar = () => {
                     </CarouselContent>
                 </Carousel>
                 <Badge className="text-[var(--generalText)] text-xs font-semibold px-2 py-1 border border-[var(--generalText)]" variant="outline">v2.0</Badge>
-            </div>
+            </Link>
 
             <NavigationMenu className="hidden md:flex">
                 <NavigationMenuList className="flex gap-6 text-sm font-medium">

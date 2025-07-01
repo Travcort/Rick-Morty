@@ -1,40 +1,53 @@
 import { CharacterCard } from "@/components/shared/CharacterCard";
-import PaginationButtons from "@/components/shared/PaginationButtons";
-import { Spinner } from "@/components/shared/Spinner";
 import { useEffect } from "react";
-import useStore from "shared/store/stateStore";
+import { useLocation, useParams } from "react-router";
+import useStore, { type CharacterTypes } from "shared/store/stateStore";
+import EndpointsLayout from "./EndpointsLayout";
 
 export default function CharactersPage() {
+    const { id } = useParams();
+    const location = useLocation();
+    const isFromLocations = location.pathname.startsWith("/location/");
+
     const isLoading = useStore((state) => state.isLoading);
     const nextPage = useStore((state) => state.nextPage);
     const prevPage = useStore((state) => state.prevPage);
-    const characters = useStore((state) => state.characters);
+    const characters = useStore((state) => {
+        if(id) {
+            return isFromLocations ? state.locationResidents : state.episodeCharacters
+        }
+        return state.characters
+    });
     const fetchCharacters = useStore((state) => state.fetchCharacters);
     const fetchEpisodes = useStore((state) => state.storeEpisodes);
 
     useEffect(() => {
-        fetchCharacters('https://rickandmortyapi.com/api/character')
-    }, []);
+        if(!id) {
+            fetchCharacters('https://rickandmortyapi.com/api/character')
+        }
+    }, [id, fetchCharacters]);
 
     return (
-        <div className="flex flex-1 flex-col">
-            {isLoading
-                ?(<Spinner size="large" className="text-[var(--cardBackground)]" />)
-                :(
-                    <>
-                        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-6 p-4">
-                            {characters.map((character) => (
-                                <CharacterCard key={character.id} name={character.name} image={character.image} 
-                                    gender={character.gender} status={character.status}
-                                    species={character.species} origin={character.origin} 
-                                    location={character.location} id={character.id} fetchEpisodes={fetchEpisodes}
-                                />
-                            ))}
-                        </div>
-                        <PaginationButtons getData={fetchCharacters} prevPage={prevPage} nextPage={nextPage} />
-                    </>
-                )
-            }
-        </div>
+        <EndpointsLayout
+            isLoading={isLoading}
+            prevPage={prevPage}
+            nextPage={nextPage}
+            items={characters}
+            {...(!id && { fetchData: fetchCharacters })}
+            renderItem={(character: CharacterTypes) => (
+                <CharacterCard 
+                    key={character.id}
+                    id={character.id}
+                    name={character.name}
+                    status={character.status}
+                    image={character.image}
+                    location={character.location}
+                    gender={character.gender}
+                    species={character.species}
+                    origin={character.origin}
+                    fetchEpisodes={fetchEpisodes}
+                />
+            )}
+        />
     );
 }
