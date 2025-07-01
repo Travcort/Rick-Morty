@@ -1,7 +1,16 @@
 import PaginationButtons from "@/components/shared/PaginationButtons";
 import { Spinner } from "@/components/shared/Spinner";
 
-export default function EndpointsLayout({ isLoading, prevPage, nextPage, items, renderItem, fetchData }) {
+type EndpointsLayoutProps<T> = {
+  isLoading: boolean;
+  prevPage: string;
+  nextPage: string;
+  items: T[];
+  renderItem: (item: T) => React.ReactNode;
+  fetchData: (url: string) => Promise<void>;
+};
+
+const EndpointsLayout = <T,>({ isLoading, prevPage, nextPage, items, renderItem, fetchData }: EndpointsLayoutProps<T>) => {
 
     return (
         <div className="flex flex-1 flex-col">
@@ -19,3 +28,5 @@ export default function EndpointsLayout({ isLoading, prevPage, nextPage, items, 
         </div>
     );
 }
+
+export default EndpointsLayout;

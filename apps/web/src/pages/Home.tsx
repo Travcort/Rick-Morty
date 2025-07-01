@@ -1,5 +1,4 @@
 import { FeaturedCharacterCard } from "@/components/shared/FeaturedCharacterCard";
-import { Footer } from "@/components/shared/Footer";
 import { Button } from "@/components/ui/button";
 import { useEffect } from "react";
 import { Link } from "react-router";
@@ -46,7 +45,7 @@ export default function HomePage( ){
 
                 <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 max-w-6xl mx-auto">
                 {randomCharacters.map((character: CharacterTypes) => (
-                    <FeaturedCharacterCard key={character.id} name={character.name} image={character.image} status={character.status} species={character.species} location={character.location}/>
+                    <FeaturedCharacterCard key={character.id} id={character.id} gender={character.gender} origin={character.origin} fetchEpisodes={async () => console.log('fetched')} name={character.name} image={character.image} status={character.status} species={character.species} location={character.location}/>
                 ))}
                 </div>
             </section>

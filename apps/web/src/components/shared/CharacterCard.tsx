@@ -2,8 +2,9 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Dot } from 'lucide-react';
 import type { CharacterTypes } from "shared/store/stateStore";
 import { ImageComponent } from "./ImageComponent";
+import { Button } from "../ui/button";
 
-export const CharacterCard = ({ id, name, image, status, species, gender, origin, location, getEpisodes }: CharacterTypes) => {
+export const CharacterCard = ({ id, name, image, status, species, gender, origin, location, fetchEpisodes }: CharacterTypes) => {
     return (
         <Card className="flex bg-[var(--cardBackground)] my-2 max-w-full md:max-w-sm shadow-lg rounded-lg overflow-hidden">
             <CardContent className="flex flex-col md:flex-row items-center md:items-start p-4 gap-4 w-full">
@@ -19,6 +20,7 @@ export const CharacterCard = ({ id, name, image, status, species, gender, origin
                     <div className="text-sm text-[var(--generalText)]">Gender: { gender }</div>
                     <div className="text-sm text-[var(--generalText)]">Origin: { origin?.name }</div>
                     <div className="text-sm text-[var(--generalText)]">Location: { location?.name }</div>
+                    <Button onClick={() => fetchEpisodes(`https://rickandmortyapi.com/api/character/${id}`)}>Episodes</Button>
                 </div>
             </CardContent>
         </Card>

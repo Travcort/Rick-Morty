@@ -15,8 +15,8 @@ export type CharacterTypes = {
     url: string;
   };
   image: string;
-  episodes: string[];
-  getEpisodes: string;
+  fetchEpisodes: (url: string) => Promise<void>;
+  episodes?: string[];
 }
 
 export type LocationTypes = {
@@ -24,7 +24,8 @@ export type LocationTypes = {
     name: string;
     type: string;
     dimension: string;
-    residents: string[];
+    fetchResidents: (url: string) => Promise<void>;
+    residents?: CharacterTypes[];
 }
 
 export type EpisodeTypes = {
@@ -32,7 +33,8 @@ export type EpisodeTypes = {
     name: string;
     air_date: string;
     episode: string;
-    characters: string[];
+    fetchCharacters: (url: string) => Promise<void>;
+    characters?: string[];
 }
 
 export type PaginationButtonsTypes = {

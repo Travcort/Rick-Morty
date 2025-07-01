@@ -27,7 +27,7 @@ export default function CharactersPage() {
                                 <CharacterCard key={character.id} name={character.name} image={character.image} 
                                     gender={character.gender} status={character.status}
                                     species={character.species} origin={character.origin} 
-                                    location={character.location} id={character.id} 
+                                    location={character.location} id={character.id} fetchEpisodes={fetchEpisodes}
                                 />
                             ))}
                         </div>

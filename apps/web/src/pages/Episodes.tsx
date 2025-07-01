@@ -9,7 +9,7 @@ export default function EpisodesPage() {
     const nextPage = useStore((state) => state.nextPage);
     const episodes = useStore((state) => state.episodes);
     const fetchEpisodes = useStore((state) => state.fetchEpisodes);
-    // const fetchEpisodes = useStore((state) => state.storeEpisodes);
+    const fetchCharacters = useStore((state) => state.storeCharacters);
 
     useEffect(() => {
         fetchEpisodes('https://rickandmortyapi.com/api/episode')
@@ -29,6 +29,7 @@ export default function EpisodesPage() {
                     name={episode.name}
                     air_date={episode.air_date}
                     episode={episode.episode}
+                    fetchCharacters={fetchCharacters}
                 />
             )}
         />

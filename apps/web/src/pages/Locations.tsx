@@ -9,7 +9,8 @@ export default function LocationsPage() {
     const nextPage = useStore((state) => state.nextPage);
     const locations = useStore((state) => state.locations);
     const fetchLocations = useStore((state) => state.fetchLocations);
-    // const fetchResidents = useStore((state) => state.storeResidents);
+    const fetchResidents = useStore((state) => state.storeResidents);
+    const locationResidents = useStore((state) => state.locationResidents);
 
     useEffect(() => {
         fetchLocations('https://rickandmortyapi.com/api/location')
@@ -29,6 +30,8 @@ export default function LocationsPage() {
                     name={location.name}
                     type={location.type}
                     dimension={location.dimension}
+                    fetchResidents={fetchResidents}
+                    residents={locationResidents}
                 />
             )}
         />
