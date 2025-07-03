@@ -5,11 +5,14 @@ import { useEffect } from "react";
 import { useParams } from "react-router";
 
 export default function EpisodesPage() {
-    const { id } = useParams();
+    const { id, filtered } = useParams();
     const isLoading = useStore((state) => state.isLoading);
     const prevPage = useStore((state) => state.prevPage);
     const nextPage = useStore((state) => state.nextPage);
-    const episodes = useStore((state) => id ? state.characterEpisodes : state.episodes);
+    const episodes = useStore((state) => {
+        if(filtered) return state.filteredData as EpisodeTypes[];
+        return id ? state.characterEpisodes : state.episodes
+    });
     const fetchEpisodes = useStore((state) => state.fetchEpisodes);
     const fetchCharacters = useStore((state) => state.storeCharacters);
 

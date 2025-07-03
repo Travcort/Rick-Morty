@@ -1,3 +1,21 @@
+export type ConfigOptions = {
+    endpoint: string;
+    page: string;
+}
+
+export type DropdownOptions = {
+    key: string;
+    value: string;
+}
+
+type FilterItem = {
+    key: string;
+    value: string;
+    options: []
+}
+
+export type CharactersDropdownTypes = ConfigOptions | FilterItem;
+
 export const charactersDropdownData = [
     {
         endpoint: 'character',
@@ -30,12 +48,14 @@ export const charactersDropdownData = [
         key: 'gender', 
         value: 'Gender',
         options: [
-            {key: 1, value: 'Male'},
-            {key: 2, value: 'Female'},
-        {   key: 3, value: 'Unknown'}
+            {key: '1', value: 'Male'},
+            {key: '2', value: 'Female'},
+        {   key: '3', value: 'Unknown'}
         ]
     }
 ]
+
+export type LocationsDropdownTypes = ConfigOptions | DropdownOptions;
 
 export const locationsDropdownData = [
     {
@@ -55,6 +75,8 @@ export const locationsDropdownData = [
         value:'Dimension'
     }
 ]
+
+export type EpisodesDropdownTypes = ConfigOptions | DropdownOptions;
 
 export const episodesDropdownData = [
     {

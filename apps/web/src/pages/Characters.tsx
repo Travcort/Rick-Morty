@@ -5,7 +5,7 @@ import useStore, { type CharacterTypes } from "shared/store/stateStore";
 import EndpointsLayout from "./EndpointsLayout";
 
 export default function CharactersPage() {
-    const { id } = useParams();
+    const { id, filtered } = useParams();
     const location = useLocation();
     const isFromLocations = location.pathname.startsWith("/location/");
 
@@ -16,7 +16,8 @@ export default function CharactersPage() {
         if(id) {
             return isFromLocations ? state.locationResidents : state.episodeCharacters
         }
-        return state.characters
+        if(filtered) return state.filteredData as CharacterTypes[];
+        return state.characters;
     });
     const fetchCharacters = useStore((state) => state.fetchCharacters);
     const fetchEpisodes = useStore((state) => state.storeEpisodes);
@@ -33,7 +34,7 @@ export default function CharactersPage() {
             prevPage={prevPage}
             nextPage={nextPage}
             items={characters}
-            {...(!id && { fetchData: fetchCharacters })}
+            {...(!id && !filtered && { fetchData: fetchCharacters })}
             renderItem={(character: CharacterTypes) => (
                 <CharacterCard 
                     key={character.id}

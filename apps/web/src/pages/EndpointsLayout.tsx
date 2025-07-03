@@ -1,3 +1,4 @@
+import { AdvancedFilters } from "@/components/shared/AdvancedFilters";
 import PaginationButtons from "@/components/shared/PaginationButtons";
 import { Spinner } from "@/components/shared/Spinner";
 
@@ -22,6 +23,7 @@ const EndpointsLayout = <T,>({ isLoading, prevPage, nextPage, items, renderItem,
                 )
                 :(
                     <>
+                        <AdvancedFilters />
                         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-6 p-4">
                             {items.map(renderItem)}
                         </div>

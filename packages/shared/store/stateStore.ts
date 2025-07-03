@@ -58,7 +58,7 @@ interface StoreState {
   setSearchFilter: (filter: string) => void;
   searchQuery: string;
   setSearchQuery: (query: string) => void;
-  filteredData: CharacterTypes[];
+  filteredData: CharacterTypes[] | LocationTypes[] | EpisodeTypes[];
   fetchFilteredData: (url: string) => Promise<void>;
 
   locations: LocationTypes[];
