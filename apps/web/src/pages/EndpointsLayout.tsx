@@ -1,7 +1,6 @@
 import { AdvancedFilters } from "@/components/shared/AdvancedFilters";
 import PaginationButtons from "@/components/shared/PaginationButtons";
 import { Spinner } from "@/components/shared/Spinner";
-import { useEffect, useRef } from "react";
 import { useLocation } from "react-router";
 
 type EndpointsLayoutProps<T> = {
