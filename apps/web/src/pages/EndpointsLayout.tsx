@@ -1,6 +1,8 @@
 import { AdvancedFilters } from "@/components/shared/AdvancedFilters";
 import PaginationButtons from "@/components/shared/PaginationButtons";
 import { Spinner } from "@/components/shared/Spinner";
+import { useEffect, useRef } from "react";
+import { useLocation } from "react-router";
 
 type EndpointsLayoutProps<T> = {
   isLoading: boolean;
@@ -12,6 +14,8 @@ type EndpointsLayoutProps<T> = {
 };
 
 const EndpointsLayout = <T,>({ isLoading, prevPage, nextPage, items, renderItem, fetchData }: EndpointsLayoutProps<T>) => {
+    const location = useLocation();
+    const filteredPage = location.pathname.includes('filtered');
 
     return (
         <div className="flex flex-1 flex-col">
@@ -23,7 +27,7 @@ const EndpointsLayout = <T,>({ isLoading, prevPage, nextPage, items, renderItem,
                 )
                 :(
                     <>
-                        <AdvancedFilters />
+                        {!filteredPage && <AdvancedFilters />}
                         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-6 p-4">
                             {items.map(renderItem)}
                         </div>

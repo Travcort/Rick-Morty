@@ -5,12 +5,16 @@ import { LocationCard } from "@/components/shared/LocationCard";
 import { useParams } from "react-router";
 
 export default function LocationsPage() {
-    const { id } = useParams();
+    const { id, filtered } = useParams();
     const isLoading = useStore((state) => state.isLoading);
     const prevPage = useStore((state) => state.prevPage);
     const nextPage = useStore((state) => state.nextPage);
-    const locations = useStore((state) => state.locations);
-    const fetchLocations = useStore((state) => state.fetchLocations);
+
+    const locations = useStore((state) => {
+        if(filtered) return state.filteredData as LocationTypes[];
+        return state.locations;
+    });
+    const fetchLocations = useStore((state) => filtered ? state.fetchFilteredData : state.fetchLocations);
     const fetchResidents = useStore((state) => state.storeResidents);
     const locationResidents = useStore((state) => state.locationResidents);
 
@@ -26,7 +30,7 @@ export default function LocationsPage() {
             prevPage={prevPage}
             nextPage={nextPage}
             items={locations}
-            fetchData={fetchLocations}
+            {...(!id && { fetchData: fetchLocations })}
             renderItem={(location: LocationTypes) => (
                 <LocationCard 
                     key={location.id}

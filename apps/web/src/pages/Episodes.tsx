@@ -13,7 +13,7 @@ export default function EpisodesPage() {
         if(filtered) return state.filteredData as EpisodeTypes[];
         return id ? state.characterEpisodes : state.episodes
     });
-    const fetchEpisodes = useStore((state) => state.fetchEpisodes);
+    const fetchEpisodes = useStore((state) => filtered ? state.fetchFilteredData : state.fetchEpisodes);
     const fetchCharacters = useStore((state) => state.storeCharacters);
 
     useEffect(() => {

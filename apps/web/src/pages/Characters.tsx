@@ -19,7 +19,8 @@ export default function CharactersPage() {
         if(filtered) return state.filteredData as CharacterTypes[];
         return state.characters;
     });
-    const fetchCharacters = useStore((state) => state.fetchCharacters);
+
+    const fetchCharacters = useStore((state) => filtered ? state.fetchFilteredData : state.fetchCharacters);
     const fetchEpisodes = useStore((state) => state.storeEpisodes);
 
     useEffect(() => {
@@ -34,7 +35,7 @@ export default function CharactersPage() {
             prevPage={prevPage}
             nextPage={nextPage}
             items={characters}
-            {...(!id && !filtered && { fetchData: fetchCharacters })}
+            {...(!id && { fetchData: fetchCharacters })}
             renderItem={(character: CharacterTypes) => (
                 <CharacterCard 
                     key={character.id}
