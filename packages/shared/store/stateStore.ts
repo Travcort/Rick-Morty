@@ -19,13 +19,44 @@ export type CharacterTypes = {
   episodes?: string[];
 }
 
+export type ApiCharacterTypes = {
+    id: number;
+    name: string;
+    status: string;
+    species: string;
+    type: string;
+    gender: string;
+    origin: {
+        name: string;
+        url: string;
+    }
+    location: {
+        name: string;
+        url: string;
+    }
+    image: string;
+    episode: Array<string>;
+    url: string;
+    created: string;
+}
+
 export type LocationTypes = {
     id: string;
     name: string;
     type: string;
     dimension: string;
     fetchResidents: (url: string) => Promise<void>;
-    residents?: CharacterTypes[];
+    residents?: ApiCharacterTypes[];
+}
+
+export type ApiLocationTypes = {
+    id: number;
+    name: string;
+    type: string;
+    dimension: string;
+    residents: Array<string>;
+    url: string;
+    created: string;
 }
 
 export type EpisodeTypes = {
@@ -35,6 +66,16 @@ export type EpisodeTypes = {
     episode: string;
     fetchCharacters: (url: string) => Promise<void>;
     characters?: string[];
+}
+
+export type ApiEpisodeTypes = {
+    id: number;
+    name: string;
+    air_date: string;
+    episode: string;
+    characters: Array<string>;
+    url: string;
+    created: string;
 }
 
 export type PaginationButtonsTypes = {
@@ -48,7 +89,7 @@ interface StoreState {
   nextPage: string;
   prevPage: string;
 
-  characters: CharacterTypes[];
+  characters: ApiCharacterTypes[];
   fetchCharacters: (url: string) => Promise<void>;
 
   characterEpisodes: EpisodeTypes[];
@@ -61,7 +102,7 @@ interface StoreState {
   filteredData: CharacterTypes[] | LocationTypes[] | EpisodeTypes[];
   fetchFilteredData: (url: string) => Promise<void>;
 
-  locations: LocationTypes[];
+  locations: ApiLocationTypes[];
   fetchLocations: (url: string) => Promise<void>;
   locationFilter: string;
   setLocationFilter: (filter: string) => void;
@@ -73,7 +114,7 @@ interface StoreState {
   locationResidents: CharacterTypes[];
   storeResidents: (url: string) => Promise<void>;
 
-  episodes: EpisodeTypes[];
+  episodes: ApiEpisodeTypes[];
   fetchEpisodes: (url: string) => Promise<void>;
 
   episodeCharacters: CharacterTypes[];

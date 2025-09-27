@@ -8,13 +8,13 @@ export type DropdownOptions = {
     value: string;
 }
 
-type FilterItem = {
+export type FilterItem = {
     key: string;
     value: string;
     options: []
 }
 
-export type CharactersDropdownTypes = ConfigOptions | FilterItem;
+export type CharactersDropdownTypes = ConfigOptions | DropdownOptions | FilterItem;
 
 export const charactersDropdownData = [
     {

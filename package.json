@@ -8,11 +8,11 @@
   ],
   "scripts": {
     "dev:web": "yarn workspace web dev",
-    "dev:mobile": "yarn workspace mobile android-dev"
+    "dev:mobile": "yarn workspace mobile start"
   },
   "resolutions": {
-    "react": "19.0.0",
-    "react-dom": "19.0.0"
+    "react": "19.1.0",
+    "react-dom": "19.1.0"
   },
   "repository": "https://github.com/Travcort/Rick-Morty.git",
   "license": "ISC"
