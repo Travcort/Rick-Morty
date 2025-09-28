@@ -2,7 +2,7 @@ import { FeaturedCharacterCard } from "@/components/shared/FeaturedCharacterCard
 import { Button } from "@/components/ui/button";
 import { useEffect } from "react";
 import { Link } from "react-router";
-import useStore, { type CharacterTypes } from "shared/store/stateStore";
+import useStore, { type ApiCharacterTypes } from "shared/store/stateStore";
 
 export default function HomePage( ){
     const characters = useStore((state) => state.characters);
@@ -12,7 +12,7 @@ export default function HomePage( ){
         fetchCharacters('https://rickandmortyapi.com/api/character/')
     }, []);
 
-    function getRandomCharacters(array: Array<CharacterTypes>, count: number) {
+    function getRandomCharacters(array: Array<ApiCharacterTypes>, count: number) {
         const shuffled = [...array];
         const currentIndex = shuffled.length;
 
@@ -44,7 +44,7 @@ export default function HomePage( ){
                 <h2 className="text-3xl font-semibold mb-8 text-center">Featured Characters</h2>
 
                 <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 max-w-6xl mx-auto">
-                {randomCharacters.map((character: CharacterTypes) => (
+                {randomCharacters.map((character: ApiCharacterTypes) => (
                     <FeaturedCharacterCard key={character.id} id={character.id} gender={character.gender} origin={character.origin} fetchEpisodes={async () => console.log('fetched')} name={character.name} image={character.image} status={character.status} species={character.species} location={character.location}/>
                 ))}
                 </div>

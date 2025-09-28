@@ -1,7 +1,7 @@
 import { CharacterCard } from "@/components/shared/CharacterCard";
 import { useEffect } from "react";
 import { useLocation, useParams } from "react-router";
-import useStore, { type CharacterTypes } from "shared/store/stateStore";
+import useStore, { type ApiCharacterTypes } from "shared/store/stateStore";
 import EndpointsLayout from "./EndpointsLayout";
 
 export default function CharactersPage() {
@@ -16,7 +16,7 @@ export default function CharactersPage() {
         if(id) {
             return isFromLocations ? state.locationResidents : state.episodeCharacters
         }
-        if(filtered) return state.filteredData as CharacterTypes[];
+        if(filtered) return state.filteredData as ApiCharacterTypes[];
         return state.characters;
     });
 
@@ -36,7 +36,7 @@ export default function CharactersPage() {
             nextPage={nextPage}
             items={characters}
             {...(!id && { fetchData: fetchCharacters })}
-            renderItem={(character: CharacterTypes) => (
+            renderItem={(character: ApiCharacterTypes) => (
                 <CharacterCard 
                     key={character.id}
                     id={character.id}

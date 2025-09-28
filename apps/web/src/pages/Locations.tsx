@@ -1,4 +1,4 @@
-import useStore, { type LocationTypes } from "shared/store/stateStore";
+import useStore, { type ApiLocationTypes } from "shared/store/stateStore";
 import EndpointsLayout from "./EndpointsLayout";
 import { useEffect } from "react";
 import { LocationCard } from "@/components/shared/LocationCard";
@@ -11,7 +11,7 @@ export default function LocationsPage() {
     const nextPage = useStore((state) => state.nextPage);
 
     const locations = useStore((state) => {
-        if(filtered) return state.filteredData as LocationTypes[];
+        if(filtered) return state.filteredData as ApiLocationTypes[];
         return state.locations;
     });
     const fetchLocations = useStore((state) => filtered ? state.fetchFilteredData : state.fetchLocations);
@@ -31,7 +31,7 @@ export default function LocationsPage() {
             nextPage={nextPage}
             items={locations}
             {...(!id && { fetchData: fetchLocations })}
-            renderItem={(location: LocationTypes) => (
+            renderItem={(location: ApiLocationTypes) => (
                 <LocationCard 
                     key={location.id}
                     id={location.id}

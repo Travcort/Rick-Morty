@@ -1,4 +1,4 @@
-import useStore, { type EpisodeTypes } from "shared/store/stateStore";
+import useStore, { type ApiEpisodeTypes } from "shared/store/stateStore";
 import EndpointsLayout from "./EndpointsLayout";
 import { EpisodeCard } from "@/components/shared/EpisodeCard";
 import { useEffect } from "react";
@@ -10,7 +10,7 @@ export default function EpisodesPage() {
     const prevPage = useStore((state) => state.prevPage);
     const nextPage = useStore((state) => state.nextPage);
     const episodes = useStore((state) => {
-        if(filtered) return state.filteredData as EpisodeTypes[];
+        if(filtered) return state.filteredData as ApiEpisodeTypes[];
         return id ? state.characterEpisodes : state.episodes
     });
     const fetchEpisodes = useStore((state) => filtered ? state.fetchFilteredData : state.fetchEpisodes);
@@ -29,7 +29,7 @@ export default function EpisodesPage() {
             nextPage={nextPage}
             items={episodes}
             {...(!id && { fetchData: fetchEpisodes })}
-            renderItem={(episode: EpisodeTypes) => (
+            renderItem={(episode: ApiEpisodeTypes) => (
                 <EpisodeCard 
                     key={episode.id}
                     id={episode.id}

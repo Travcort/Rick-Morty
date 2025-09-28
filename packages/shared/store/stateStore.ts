@@ -41,7 +41,7 @@ export type ApiCharacterTypes = {
 }
 
 export type LocationTypes = {
-    id: string;
+    id: number;
     name: string;
     type: string;
     dimension: string;
@@ -60,7 +60,7 @@ export type ApiLocationTypes = {
 }
 
 export type EpisodeTypes = {
-    id: string;
+    id: number;
     name: string;
     air_date: string;
     episode: string;
@@ -92,14 +92,14 @@ interface StoreState {
   characters: ApiCharacterTypes[];
   fetchCharacters: (url: string) => Promise<void>;
 
-  characterEpisodes: EpisodeTypes[];
+  characterEpisodes: ApiEpisodeTypes[];
   storeEpisodes: (url: string) => Promise<void>;
 
   searchFilter: string;
   setSearchFilter: (filter: string) => void;
   searchQuery: string;
   setSearchQuery: (query: string) => void;
-  filteredData: CharacterTypes[] | LocationTypes[] | EpisodeTypes[];
+  filteredData: ApiCharacterTypes[] | ApiLocationTypes[] | ApiEpisodeTypes[];
   fetchFilteredData: (url: string) => Promise<void>;
 
   locations: ApiLocationTypes[];
@@ -108,16 +108,16 @@ interface StoreState {
   setLocationFilter: (filter: string) => void;
   locationQuery: string;
   setLocationQuery: (query: string) => void;
-  filteredLocations: LocationTypes[];
+  filteredLocations: ApiLocationTypes[];
   fetchFilteredLocations: (url: string) => Promise<void>;
 
-  locationResidents: CharacterTypes[];
+  locationResidents: ApiCharacterTypes[];
   storeResidents: (url: string) => Promise<void>;
 
   episodes: ApiEpisodeTypes[];
   fetchEpisodes: (url: string) => Promise<void>;
 
-  episodeCharacters: CharacterTypes[];
+  episodeCharacters: ApiCharacterTypes[];
   storeCharacters: (url: string) => Promise<void>;
 }
 
