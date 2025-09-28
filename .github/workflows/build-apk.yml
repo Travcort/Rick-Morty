@@ -7,6 +7,7 @@ on:
 jobs:
     android-build:
         name: Android Build
+        if: startsWith(github.event.release.tag_name, 'mobile-')
         runs-on: ubuntu-latest
         env:
           APP_SCHEME: ${{ secrets.APP_SCHEME }}
@@ -23,10 +24,10 @@ jobs:
                 node-version: 18
 
             - name: Install Dependencies
-              run: npm install
+              run: cd apps/mobile && npm install
 
             - name: Prebuild the Native Directory
-              run: npx expo prebuild --platform android --no-install --clean
+              run: cd apps/mobile && npx expo prebuild --platform android --no-install --clean
 
             - name: Cache Gradle Wrapper
               uses: actions/cache@v3
@@ -45,15 +46,15 @@ jobs:
                     ${{ runner.os }}-gradle-caches-
 
             - name: Make Gradlew executable
-              run: cd android && chmod +x ./gradlew
+              run: cd apps/mobile/android && chmod +x ./gradlew
 
             - name: Build Android Release
               run: |
-                cd android && ./gradlew clean && ./gradlew assembleRelease
+                cd apps/mobile/android && ./gradlew clean && ./gradlew assembleRelease
                     
             - name: Upload APK to GitHub Release
               uses: softprops/action-gh-release@v2
               with:
-                files: android/app/build/outputs/apk/release/app-release.apk
+                files:  apps/mobile/android/app/build/outputs/apk/release/app-release.apk
               env:
                 GITHUB_TOKEN: ${{ secrets.RICK_MORTY_RELEASE_PLEASE_TOKEN }}

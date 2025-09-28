@@ -1,0 +1,17 @@
+{
+  "packages": {
+    "apps/mobile": {
+      "release-type": "expo",
+      "package-name": "mobile",
+      "component": "mobile",
+      "changelog-path": "apps/mobile/CHANGELOG.md"
+    },
+    "apps/web": {
+      "release-type": "node",
+      "package-name": "web",
+      "component": "web",
+      "changelog-path": "apps/web/CHANGELOG.md"
+    }
+  },
+  "bootstrap-sha": "f2967df34824ad71497780469a69e90d7d01511e"
+}
