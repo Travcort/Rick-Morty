@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.0.2](https://github.com/Travcort/Rick-Morty/compare/web-v1.0.1...web-v1.0.2) (2025-09-28)
+
+
+### Bug Fixes
+
+* moved the CHANGELOGS to the base folder of each app ([2327935](https://github.com/Travcort/Rick-Morty/commit/23279352358a10dd9a09b5ef346d6468c22574f7))
+
 ## [1.0.1](https://github.com/Travcort/Rick-Morty/compare/web-v1.0.0...web-v1.0.1) (2025-09-28)
 
 
