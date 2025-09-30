@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.1.2](https://github.com/Travcort/Rick-Morty/compare/mobile-v1.1.1...mobile-v1.1.2) (2025-09-30)
+
+
+### Bug Fixes
+
+* **mobile:** pinned react version to fix production build crash ([ae07307](https://github.com/Travcort/Rick-Morty/commit/ae0730749c139c69d225071c95e218d31fbbc0c5))
+
 ## [1.1.1](https://github.com/Travcort/Rick-Morty/compare/mobile-v1.1.0...mobile-v1.1.1) (2025-09-28)
 
 
