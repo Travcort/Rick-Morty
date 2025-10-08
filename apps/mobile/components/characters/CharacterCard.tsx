@@ -1,9 +1,9 @@
 import { Button, Card, Text } from "react-native-paper";
 import { Image, ScrollView, View, StyleSheet } from 'react-native';
-import { useMyAppContext } from "@/app/_layout";
 import Colours from "@/lib/Colours";
 import { useRouter } from "expo-router";
 import Octicons from '@expo/vector-icons/Octicons';
+import { useMyAppContext } from "@/lib/Context";
 
 type CharacterCardTypes = {
     name: string; 
@@ -74,7 +74,7 @@ const CharacterCard: React.FC<CharacterCardTypes> = ({
                         mode="outlined"
                         onPress={() => {
                             getEpisodes();
-                            router.navigate("/charEpi");
+                            router.navigate("/episodes?characters=true");
                         }}
                     >
                         Episodes

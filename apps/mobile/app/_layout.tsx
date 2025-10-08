@@ -4,12 +4,13 @@ import { Asset } from 'expo-asset';
 import { Stack } from 'expo-router';
 import * as SplashScreen from 'expo-splash-screen';
 import { StatusBar } from 'expo-status-bar';
-import { createContext, useContext, useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import 'react-native-reanimated';
 import { PaperProvider } from 'react-native-paper';
 import Theme from '@/lib/Theme';
 import { useColorScheme } from 'react-native';
 import AnimatedSplashScreen from '@/components/AnimatedSplashScreen';
+import { MyAppContext } from '@/lib/Context';
 
 export {
   // Catch any errors thrown by the Layout component.
@@ -61,15 +62,6 @@ export default function RootLayout() {
     return <RootLayoutNav />;
 }
 
-// Context for Drawer Triggering
-const MyAppContext = createContext<{ customTheme: "light"|"dark" } | null>(null);
-
-export const useMyAppContext = () => {
-  const ctx = useContext(MyAppContext);
-  if (!ctx) throw new Error("useMyAppContext must be used inside provider");
-  return ctx;
-};
-
 function RootLayoutNav() {
   const colourScheme = useColorScheme();
   const customTheme = useColorScheme() ?? 'light';
@@ -84,9 +76,9 @@ function RootLayoutNav() {
         <MyAppContext.Provider value={{ customTheme }}>
             <Stack>
                 <Stack.Screen name="index" options={{headerShown: false}} />
-                <Stack.Screen name="Characters" options={{headerShown: false}} />
-                <Stack.Screen name="Episodes" options={{headerShown: false}} />
-                <Stack.Screen name="Locations" options={{headerShown: false}} />
+                <Stack.Screen name="characters" options={{headerShown: false}} />
+                <Stack.Screen name="episodes" options={{headerShown: false}} />
+                <Stack.Screen name="locations" options={{headerShown: false}} />
             </Stack>
         </MyAppContext.Provider>
     </PaperProvider>

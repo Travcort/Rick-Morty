@@ -1,18 +1,26 @@
 import { View } from "react-native";
 import { useEffect, useState } from "react";
 import { charactersDropdownData } from 'shared/store/dropdownStore';
-import useStore from "shared/store/stateStore";
-import { useMyAppContext } from "./_layout";
+import useStore, { ApiCharacterTypes } from "shared/store/stateStore";
 import Colours from "@/lib/Colours";
 import CharactersDisplay from "@/components/characters/CharactersDisplay";
-import { ActivityIndicator } from "react-native-paper";
-import { CharactersContext } from "@/lib/Context";
+import { ActivityIndicator} from "react-native-paper";
+import { CharactersContext, useMyAppContext } from "@/lib/Context";
+import { useLocalSearchParams } from "expo-router";
 
 export default function Characters() {
   const { customTheme } = useMyAppContext();
+  const { filtered, residents, episodes } = useLocalSearchParams();
   const isLoading = useStore((state) => state.isLoading);
   const dropDownData = charactersDropdownData;
-  const characters = useStore((state) => state.characters);
+  const characters = useStore((state) => filtered 
+    ? state.filteredData as ApiCharacterTypes[] 
+    : residents
+    ? state.locationResidents
+    : episodes
+    ? state.episodeCharacters
+    : state.characters
+  );
   const fetchCharacters = useStore((state) => state.fetchCharacters);
   const fetchEpisodes = useStore((state) => state.storeEpisodes);
   const nextPage = useStore((state) => state.nextPage);

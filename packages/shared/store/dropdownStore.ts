@@ -11,7 +11,7 @@ export type DropdownOptions = {
 export type FilterItem = {
     key: string;
     value: string;
-    options: []
+    options: DropdownOptions[];
 }
 
 export type CharactersDropdownTypes = ConfigOptions | DropdownOptions | FilterItem;

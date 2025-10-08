@@ -1,9 +1,9 @@
 import {  FlatList, Image, ImageBackground, StyleSheet, View } from "react-native";
 import Colours from "@/lib/Colours";
-import { useMyAppContext } from "./_layout";
 import NavListHeader from "@/components/index/NavListHeader";
 import { Card, Text } from "react-native-paper";
 import { useRouter } from "expo-router";
+import { useMyAppContext } from "@/lib/Context";
 
 type NavLink = {
     id: string;
@@ -21,19 +21,19 @@ export default function Index() {
             id: '1',
             text: 'Characters',
             image: require('@/assets/images/characters.jpg'),
-            href: '/Characters'
+            href: '/characters'
         },
         {
             id: '2',
             text: 'Locations',
             image: require('@/assets/images/locations.jpg'),
-            href: '/Locations'
+            href: '/locations'
         },
         {
             id: '3',
             text: 'Episodes',
             image: require('@/assets/images/episodes.jpg'),
-            href: '/Episodes'
+            href: '/episodes'
         }
     ];
 

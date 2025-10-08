@@ -2,6 +2,14 @@ import { createContext, useContext } from "react";
 import { CharactersDropdownTypes, EpisodesDropdownTypes, LocationsDropdownTypes } from 'shared/store/dropdownStore';
 import { ApiCharacterTypes, ApiEpisodeTypes, ApiLocationTypes } from "shared/store/stateStore";
 
+export const MyAppContext = createContext<{ customTheme: "light"|"dark" } | null>(null);
+
+export const useMyAppContext = () => {
+  const ctx = useContext(MyAppContext);
+  if (!ctx) throw new Error("useMyAppContext must be used inside provider");
+  return ctx;
+};
+
 type CharactersContextProps = {
   dropDownData:  Array<CharactersDropdownTypes|LocationsDropdownTypes|EpisodesDropdownTypes>;
 

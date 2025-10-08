@@ -1,8 +1,8 @@
 import { Button, Card, Text } from "react-native-paper";
 import { View, StyleSheet } from 'react-native';
-import { useMyAppContext } from "@/app/_layout";
 import Colours from "@/lib/Colours";
 import { useRouter } from "expo-router";
+import { useMyAppContext } from "@/lib/Context";
 
 type EpisodeCardTypes = {
     episodeID: number;
@@ -40,7 +40,7 @@ const EpisodeCard: React.FC<EpisodeCardTypes> = ({
                     mode="outlined"
                     onPress={() => {
                         getCharacters();
-                        router.navigate("/episodeCharacters");
+                        router.navigate("/characters?episodes=true");
                     }}
                 >
                     Characters

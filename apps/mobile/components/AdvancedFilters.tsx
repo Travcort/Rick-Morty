@@ -1,11 +1,12 @@
 import { useRouter } from "expo-router";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Modal, StyleSheet, View } from "react-native";
 import { Button } from "react-native-paper";
 import { SafeAreaProvider, SafeAreaView } from "react-native-safe-area-context";
 import useStore from "shared/store/stateStore";
 import { CharactersDropdownTypes, EpisodesDropdownTypes, LocationsDropdownTypes } from 'shared/store/dropdownStore';
 import DropDown from "./DropDown";
+import { useMyAppContext } from "@/lib/Context";
 
 type AdvancedFiltersProps = { 
     dropDownData: Array<CharactersDropdownTypes|LocationsDropdownTypes|EpisodesDropdownTypes>;    
@@ -15,12 +16,13 @@ type AdvancedFiltersProps = {
 };
 
 export default function AdvancedFilters ({ dropDownData, modal, closeModal, toggleModal }: Readonly<AdvancedFiltersProps>) {
-
+    const { customTheme } = useMyAppContext();
     const router = useRouter();
     const fetchFilteredData = useStore((state) => state.fetchFilteredData);
 
     const [selectedOptions, setSelectedOptions] = useState<Record<string, string[]>>({});
-    const [dropDownQuery, setDropDownQuery] = useState<string>('');
+    const initialDropDownQueryState = { key: '', value: '' };
+    const [dropDownQuery, setDropDownQuery] = useState(initialDropDownQueryState);
     const [expandedKey, setExpandedKey] = useState<string|null>(null);
 
     const toggleExpand = (key: string) => {
@@ -47,11 +49,21 @@ export default function AdvancedFilters ({ dropDownData, modal, closeModal, togg
 
     const handleSearch = async () => {
         const queryString = Object.entries(selectedOptions).map(([key, values]) => `${key}=${values.join(',')}`).join('&');
-        const pathname = dropDownData[0].endpoint;
+        const pathname = dropDownData.filter(item => 'endpoint' in item)[0].endpoint;
         const url = `https://rickandmortyapi.com/api/${pathname}/?${queryString}`
         fetchFilteredData(url);
-        router.navigate(`/${pathname}s/filtered`)
+        router.navigate(`/${pathname}s?filtered=true`)
     };
+
+    useEffect(() => {
+        if (dropDownQuery.key && dropDownQuery.value) {
+            // Make sure the text input value is added to selectedOptions automatically
+            setSelectedOptions(prev => ({
+                ...prev,
+                [dropDownQuery.key]: [dropDownQuery.value.toLowerCase()],
+            }));
+        }
+    }, [dropDownQuery]);
 
     return (
         <SafeAreaProvider>
@@ -63,15 +75,22 @@ export default function AdvancedFilters ({ dropDownData, modal, closeModal, togg
                 }}
             >
                 <SafeAreaView style={styles.overlay}>
-                    <View style={styles.modalContainer}>
+                    <View style={[styles.modalContainer, { backgroundColor: customTheme === 'light' ? 'white' : 'black' }]}>
                         <DropDown {...{ selectedOptions, dropDownData, dropDownQuery, setDropDownQuery, toggleExpand, toggleOption  }} />
                         <Button mode="contained" style={{ marginTop: '10%' }} 
-                            onPress={() => console.log(JSON.stringify(selectedOptions, null, 2))}
+                            onPress={() => {
+                                handleSearch();
+                                toggleModal();
+                            }}
                         >
                             Search
                         </Button>
                         <Button mode="contained" style={{ marginTop: '10%' }} 
-                            onPress={toggleModal}
+                            onPress={() => {
+                                toggleModal();
+                                setSelectedOptions({});
+                                setDropDownQuery(initialDropDownQueryState);
+                            }}
                         >
                             Close
                         </Button>
@@ -92,7 +111,6 @@ const styles = StyleSheet.create({
         margin: 20,
         padding: 20,
         borderRadius: 12,
-        backgroundColor: 'white',
         elevation: 4,
     }
 });

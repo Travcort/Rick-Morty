@@ -1,8 +1,8 @@
 import { Button, Card, Text } from "react-native-paper";
 import { View, StyleSheet } from 'react-native';
-import { useMyAppContext } from "@/app/_layout";
 import Colours from "@/lib/Colours";
 import { useRouter } from "expo-router";
+import { useMyAppContext } from "@/lib/Context";
 
 type LocationCardTypes = {
     locationID: number;
@@ -40,7 +40,7 @@ const LocationCard: React.FC<LocationCardTypes> = ({
                     mode="outlined"
                     onPress={() => {
                         getResidents();
-                        router.navigate("/residents");
+                        router.navigate("/characters?residents=true");
                     }}
                 >
                     Residents

@@ -1,6 +1,6 @@
 import { View } from "react-native";
-import { useMyAppContext } from "@/app/_layout";
 import Colours from "@/lib/Colours";
+import { useMyAppContext } from "@/lib/Context";
 
 export default function CardSeparator () {
     const { customTheme } = useMyAppContext();

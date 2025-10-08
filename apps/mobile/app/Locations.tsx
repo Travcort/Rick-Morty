@@ -3,16 +3,17 @@ import { useEffect, useState } from "react";
 import { View } from "react-native";
 import { ActivityIndicator } from "react-native-paper";
 import { locationsDropdownData } from "shared/store/dropdownStore";
-import useStore from "shared/store/stateStore";
-import { useMyAppContext } from "./_layout";
+import useStore, { ApiLocationTypes } from "shared/store/stateStore";
 import LocationsDisplay from "@/components/locations/LocationsDisplay";
-import { LocationsContext } from "@/lib/Context";
+import { LocationsContext, useMyAppContext } from "@/lib/Context";
+import { useLocalSearchParams } from "expo-router";
 
 export default function Locations() {
     const { customTheme } = useMyAppContext();
+    const { filtered } = useLocalSearchParams();
     const isLoading = useStore((state) => state.isLoading);
     const dropDownData = locationsDropdownData;
-    const locations = useStore((state) => state.locations);
+    const locations = useStore((state) => filtered ? state.filteredData as ApiLocationTypes[] : state.locations);
     const fetchLocations = useStore((state) => state.fetchLocations);
     const fetchResidents = useStore((state) => state.storeResidents);
     const prevPage = useStore((state) => state.prevPage);

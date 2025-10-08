@@ -1,15 +1,18 @@
 import { Dispatch, SetStateAction } from "react";
 import { Checkbox, List, TextInput } from 'react-native-paper';
 import { View } from 'react-native';
-import { CharactersDropdownTypes, EpisodesDropdownTypes, LocationsDropdownTypes } from 'shared/store/dropdownStore';
+import { 
+    type CharactersDropdownTypes, type EpisodesDropdownTypes, type LocationsDropdownTypes, 
+    type FilterItem, type DropdownOptions 
+} from 'shared/store/dropdownStore';
 
 type DropDownProps = {
     selectedOptions: Record<string, string[]>;
 
     dropDownData: Array<CharactersDropdownTypes|LocationsDropdownTypes|EpisodesDropdownTypes>;
 
-    dropDownQuery: string;
-    setDropDownQuery: Dispatch<SetStateAction<string>>;
+    dropDownQuery: { key: string; value: string; };
+    setDropDownQuery: Dispatch<SetStateAction<{ key: string; value: string; }>>;
 
     toggleExpand: (key: string) => void;
 
@@ -18,9 +21,23 @@ type DropDownProps = {
 
 const DropDown =  ({ selectedOptions, dropDownData, dropDownQuery, setDropDownQuery, toggleExpand, toggleOption }: DropDownProps) => {
 
+    const optionIcon = (key: string): string => {
+        if (key === "gender") {
+            return "gender-male-female"
+        } else if (key === "species") {
+            return "dna"
+        } else if (key === "status") {
+            return "heart-pulse"
+        } else {
+            return "label"
+        }
+    }
+
     return (
         <List.Section>
-            {dropDownData.slice(1).map((item )=> {
+            {dropDownData
+            .filter((item): item is DropdownOptions | FilterItem => !('endpoint' in item))
+            .map((item)=> {
                 if ("options" in item) {
                     return (
                         <List.Accordion
@@ -28,10 +45,7 @@ const DropDown =  ({ selectedOptions, dropDownData, dropDownQuery, setDropDownQu
                             title={item.value}
                             left={props => 
                                 <List.Icon {...props} 
-                                    icon={item.key === "gender"
-                                    ? "gender-male-female" 
-                                    : "folder"
-                                    }
+                                    icon={optionIcon(item.key)}
                                 />
                             }
                             onPress={() => {
@@ -39,7 +53,8 @@ const DropDown =  ({ selectedOptions, dropDownData, dropDownQuery, setDropDownQu
                             }}
                         >
                             {
-                                item.options.map(option => (
+                                item.options
+                                .map((option) => (
                                     <View key={option.key} style={{ flexDirection: 'row', alignItems: 'center' }}>
                                         <List.Item title={option.value} />
                                         <Checkbox
@@ -65,10 +80,7 @@ const DropDown =  ({ selectedOptions, dropDownData, dropDownQuery, setDropDownQu
                             title={item.value}
                             left={props => 
                                 <List.Icon {...props} 
-                                    icon={item.key === "gender"
-                                    ? "gender-male-female" 
-                                    : "folder"
-                                    }
+                                    icon={optionIcon(item.key)}
                                 />
                             }
                             onPress={() => {
@@ -76,11 +88,9 @@ const DropDown =  ({ selectedOptions, dropDownData, dropDownQuery, setDropDownQu
                             }}
                         >
                             <TextInput
-                                key={item.key}
                                 label={item.value}
-                                value={dropDownQuery}
-                                onEndEditing={() => toggleOption(item.key, dropDownQuery)}
-                                onChangeText={text => setDropDownQuery(text)}
+                                value={dropDownQuery.value}
+                                onChangeText={text => setDropDownQuery({ key: item.key, value: text })}
                             />
                         </List.Accordion>
                     );
