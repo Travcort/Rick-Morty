@@ -1,5 +1,14 @@
 # Changelog
 
+## [1.1.3](https://github.com/Travcort/Rick-Morty/compare/mobile-v1.1.2...mobile-v1.1.3) (2025-10-08)
+
+
+### Bug Fixes
+
+* changed each card's buttons to working state for navigating between different screen states ([e1bc93a](https://github.com/Travcort/Rick-Morty/commit/e1bc93a9f1ccf569bfe78c12c18a215ee456317c))
+* corrected the search function for each screen ([e1bc93a](https://github.com/Travcort/Rick-Morty/commit/e1bc93a9f1ccf569bfe78c12c18a215ee456317c))
+* fixed missing 'not found' screen ([e1bc93a](https://github.com/Travcort/Rick-Morty/commit/e1bc93a9f1ccf569bfe78c12c18a215ee456317c))
+
 ## [1.1.2](https://github.com/Travcort/Rick-Morty/compare/mobile-v1.1.1...mobile-v1.1.2) (2025-09-30)
 
 
