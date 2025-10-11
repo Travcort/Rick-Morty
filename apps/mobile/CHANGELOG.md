@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.1.4](https://github.com/Travcort/Rick-Morty/compare/mobile-v1.1.3...mobile-v1.1.4) (2025-10-11)
+
+
+### Bug Fixes
+
+* corrected the APK build script ([8bfdfa3](https://github.com/Travcort/Rick-Morty/commit/8bfdfa33d73814fa5610f233065e71c8076d084b))
+
 ## [1.1.3](https://github.com/Travcort/Rick-Morty/compare/mobile-v1.1.2...mobile-v1.1.3) (2025-10-08)
 
 
