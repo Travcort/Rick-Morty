@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.1.5](https://github.com/Travcort/Rick-Morty/compare/mobile-v1.1.4...mobile-v1.1.5) (2025-10-12)
+
+
+### Bug Fixes
+
+* corrected failed detection of file name case change ([666eb78](https://github.com/Travcort/Rick-Morty/commit/666eb78482f1b1b24c421b3ce887c4e2a2d2c2ad))
+
 ## [1.1.4](https://github.com/Travcort/Rick-Morty/compare/mobile-v1.1.3...mobile-v1.1.4) (2025-10-11)
 
 
